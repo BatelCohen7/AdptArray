@@ -12,7 +12,7 @@ typedef struct AdptArray_
     PRINT_FUNC printFunc;
 }AdptArray;
 
-
+//creating a new array 
 PAdptArray CreateAdptArray(COPY_FUNC copyFunc_, DEL_FUNC delFunc_, PRINT_FUNC printFunc_)
 {
     PAdptArray pArr = (PAdptArray)malloc(sizeof(AdptArray));
@@ -26,6 +26,7 @@ PAdptArray CreateAdptArray(COPY_FUNC copyFunc_, DEL_FUNC delFunc_, PRINT_FUNC pr
     return pArr;
 }
 
+// This func change the element at index in array to the element that the user want
 Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElem)
 {
     if (pArr == NULL || index < 0)
@@ -33,6 +34,7 @@ Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElem)
 
     if (idx >= pArr->ArrSize)
     {
+
         // Extend Array
         PElement* newpElemArr = (PElement*)realloc(pArr->pElemArr, (idx + 1) * sizeof(PElement));
         if (newpElemArr == NULL)
@@ -57,6 +59,7 @@ Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElem)
     return SUCCESS;
 }
 
+// This func is getting a copy of element by the index in the array
 PElement GetAdptArrayAt(PAdptArray pArr, int idx)
 {
     if (pArr == NULL || idx < 0 || idx >= pArr->ArrSize || pArr->pElemArr[idx] == NULL)
@@ -65,6 +68,7 @@ PElement GetAdptArrayAt(PAdptArray pArr, int idx)
     return pArr->copyFunc(pArr->pElemArr[idx]);
 }
 
+// return the size of the array
 int GetAdptArraySize(PAdptArray pArr)
 {
     if (pArr == NULL)
@@ -73,7 +77,7 @@ int GetAdptArraySize(PAdptArray pArr)
     return pArr->ArrSize;
 }
 
-
+// print the array
 void PrintDB(PAdptArray pArr)
 {
     if (pArr == NULL)
@@ -88,6 +92,7 @@ void PrintDB(PAdptArray pArr)
     
 }
 
+// delete the array and its elements
 void DeleteAdptArray(PAdptArray pArr)
 {
 	int i;
